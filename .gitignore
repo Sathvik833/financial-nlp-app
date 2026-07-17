@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.idea/
+node_modules/
+.next/
+package-lock.json
+.env*.local
+.vercel/
+frontend/.env.production
+frontend/.env*.local
+frontend/.vercel/
