@@ -12,6 +12,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://financial-nlp-frontend.vercel.app",
+        "https://financial-nlp-frontend-datlasathvik22-8304s-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
