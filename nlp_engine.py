@@ -26,16 +26,21 @@ def nlp_engine(get_sentences):
 
 
 def _ensure_nltk_tokenizer_resources():
-    nltk_data_dir = os.getenv("NLTK_DATA")
-    if nltk_data_dir and nltk_data_dir not in nltk.data.path:
-        nltk.data.path.append(nltk_data_dir)
+    nltk_data_dirs = [
+        os.getenv("NLTK_DATA"),
+        "/opt/render/nltk_data",
+    ]
+
+    for nltk_data_dir in nltk_data_dirs:
+        if nltk_data_dir and nltk_data_dir not in nltk.data.path:
+            nltk.data.path.append(nltk_data_dir)
 
     try:
         nltk.data.find("tokenizers/punkt")
         nltk.data.find("tokenizers/punkt_tab")
     except LookupError as exc:
         raise RuntimeError(
-            "NLTK tokenizer data is missing. Ensure 'punkt' and 'punkt_tab' are downloaded and NLTK_DATA is configured."
+            f"NLTK tokenizer data is missing. Ensure 'punkt' and 'punkt_tab' are downloaded. Search paths: {nltk.data.path}"
         ) from exc
 
 
