@@ -2,6 +2,7 @@ import os
 
 import requests
 from dotenv import load_dotenv
+import nltk
 from nltk.tokenize import sent_tokenize
 from transformers import pipeline
 
@@ -24,6 +25,20 @@ def nlp_engine(get_sentences):
     return predictions
 
 
+def _ensure_nltk_tokenizer_resources():
+    nltk_data_dir = os.getenv("NLTK_DATA")
+    if nltk_data_dir and nltk_data_dir not in nltk.data.path:
+        nltk.data.path.append(nltk_data_dir)
+
+    try:
+        nltk.data.find("tokenizers/punkt")
+        nltk.data.find("tokenizers/punkt_tab")
+    except LookupError as exc:
+        raise RuntimeError(
+            "NLTK tokenizer data is missing. Ensure 'punkt' and 'punkt_tab' are downloaded and NLTK_DATA is configured."
+        ) from exc
+
+
 def split_sentences(text):
     if not isinstance(text, str):
         raise ValueError("Text must be a string.")
@@ -32,6 +47,7 @@ def split_sentences(text):
     if not cleaned_text:
         raise ValueError("Text cannot be empty.")
 
+    _ensure_nltk_tokenizer_resources()
     return sent_tokenize(cleaned_text)
 
 
