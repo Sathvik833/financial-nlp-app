@@ -26,21 +26,38 @@ def nlp_engine(get_sentences):
 
 
 def _ensure_nltk_tokenizer_resources():
-    nltk_data_dirs = [
-        os.getenv("NLTK_DATA"),
-        "/opt/render/nltk_data",
-    ]
+    nltk_data_dir = os.getenv("NLTK_DATA", "/tmp/nltk_data")
+    os.makedirs(nltk_data_dir, exist_ok=True)
 
-    for nltk_data_dir in nltk_data_dirs:
-        if nltk_data_dir and nltk_data_dir not in nltk.data.path:
-            nltk.data.path.append(nltk_data_dir)
+    if nltk_data_dir not in nltk.data.path:
+        nltk.data.path.insert(0, nltk_data_dir)
+
+    required_resources = {
+        "punkt": "tokenizers/punkt",
+        "punkt_tab": "tokenizers/punkt_tab",
+    }
+
+    missing_packages = []
+    for package_name, resource_path in required_resources.items():
+        try:
+            nltk.data.find(resource_path)
+        except LookupError:
+            missing_packages.append(package_name)
+
+    for package_name in missing_packages:
+        nltk.download(
+            package_name,
+            download_dir=nltk_data_dir,
+            quiet=True,
+            raise_on_error=True,
+        )
 
     try:
         nltk.data.find("tokenizers/punkt")
         nltk.data.find("tokenizers/punkt_tab")
     except LookupError as exc:
         raise RuntimeError(
-            f"NLTK tokenizer data is missing. Ensure 'punkt' and 'punkt_tab' are downloaded. Search paths: {nltk.data.path}"
+            f"NLTK tokenizer data is missing after download attempt. Search paths: {nltk.data.path}"
         ) from exc
 
 
