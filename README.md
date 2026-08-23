@@ -5,6 +5,8 @@ A web app that classifies financial text as positive, neutral, or negative. Past
 Team 5 — ISBA 2411: Sathvik Datla, Jiaru Li, Yujia Weng
 
 Live Url: https://financial-nlp-frontend.vercel.app/
+Slide Deck Url: https://docs.google.com/presentation/d/1167MePHz4kfSB1QEOb-rsz65pYKOxGWGQbJp5pgoAK4/edit?usp=sharing
+Video Demo Url: https://docs.google.com/videos/u/0/d/18mYzoCkOPP73vOJYg9tor9b6KpdP4X6xC802wayev4c/play?usp=chrome_extension_sharing
 
 ---
 
