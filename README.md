@@ -19,8 +19,8 @@ Our original scope was to read whole corporate filings, news feeds, and exchange
 We ended up reducing the scope of the project to where the user pastes the text into an input box. That paragraph is then split up into smaller sentences using the NLTK Python library, and each sentence gets its own neutral, positive, or negative rating. At the end there is a voting system that checks which sentiment was the majority in that paragraph, and the entire paragraph ends up getting one result: positive, neutral, or negative.
 
 ## Project Architecture
+<img width="901" height="576" alt="architecture" src="https://github.com/user-attachments/assets/f27b756e-4d80-4991-90ab-6b2af6bea07c" />
 
-![Project Architecture](assets/architecture.png)
 
 Tech Stack: FastAPI, Vercel, Render, next.js, and Airtable
 
