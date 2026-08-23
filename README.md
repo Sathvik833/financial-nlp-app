@@ -1,6 +1,9 @@
 # Financial NLP Sentiment Project
 
-This project implements the PDF requirements as a working FastAPI backend and Next.js frontend.
+A web app that classifies financial text as positive, neutral, or negative. Paste in a paragraph, and the app splits it into sentences, classifies each one, and returns both the per-sentence labels and an overall verdict for the paragraph.
+
+Team 5 — ISBA 2411: Sathvik Datla, Jiaru Li, Yujia Weng
+Live Url: https://financial-nlp-frontend.vercel.app/
 
 ## Backend
 
